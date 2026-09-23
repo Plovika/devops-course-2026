@@ -11,3 +11,4 @@
 - Python
 - Docker (скоро)
 # main change
+# Multi-remote test
