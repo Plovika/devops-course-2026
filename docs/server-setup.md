@@ -30,3 +30,11 @@
 - 01-clean-install (создан после чистой установки)
 - 02-keys-configured (создан после настройки ключей)
 - 03-ssh-hardened (создан после усиления SSH и настройки UFW)
+
+## 8. Веб-сервер
+- Устанавливаемый пакет: nginx
+- Путь к конфигурации ресурса: /etc/nginx/sites-available/devops-site
+- Каталог ресурса: /var/www/devops-site, владелец devops:devops, права 755 для каталогов, 644 для файлов
+- Пути к сертификату и ключу: /etc/ssl/certs/devops.crt (644), /etc/ssl/private/devops.key (600, владелец root)
+- Команда формирования сертификата: sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/devops.key -out /etc/ssl/certs/devops.crt -subj "/CN=devops.local" -addext "subjectAltName=DNS:devops.local"
+- Срок действия: 365 дней
