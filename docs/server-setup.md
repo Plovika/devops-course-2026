@@ -30,6 +30,8 @@
 - 01-clean-install (создан после чистой установки)
 - 02-keys-configured (создан после настройки ключей)
 - 03-ssh-hardened (создан после усиления SSH и настройки UFW)
+- 04-nginx-https (создан после настройки Nginx и HTTPS)
+- 05-docker-compose (создан после настройки Docker Compose)
 
 ## 8. Веб-сервер
 - Устанавливаемый пакет: nginx
@@ -38,3 +40,12 @@
 - Пути к сертификату и ключу: /etc/ssl/certs/devops.crt (644), /etc/ssl/private/devops.key (600, владелец root)
 - Команда формирования сертификата: sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/devops.key -out /etc/ssl/certs/devops.crt -subj "/CN=devops.local" -addext "subjectAltName=DNS:devops.local"
 - Срок действия: 365 дней
+
+## 9. Контейнеризация
+- Способ установки Docker Engine: из официального репозитория Docker (docker-ce).
+- Участники группы docker: пользователь devops.
+- Расположение проекта на сервере: /home/devops/app
+- Расположение файла .env и его права: /home/devops/app/.env, права 600.
+- Публикуемые порты и адреса: приложение доступно только на 127.0.0.1:5000.
+- Именованные тома: db_data (для хранения данных PostgreSQL).
+- Конфигурация обратного прокси-сервера: Nginx проксирует запросы с https://devops.local/app/ на http://127.0.0.1:5000/.
